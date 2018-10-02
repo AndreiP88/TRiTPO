@@ -60,15 +60,14 @@ public class Complex {
         im = imag;
     }
 
-    public double len() {
-        return re * re + im * im;
-    }
-
     public Complex div(Complex b) {
-        double temp = re * b.re - im * b.im;
+        Complex a = this;
+        if (b.re == 0 && b.im == 0) throw new java.lang.ArithmeticException("Division by zero!");
+        double real = (a.re*b.re+a.im*b.im) / (b.re*b.re + b.im*b.im);
+        double imag = (b.re * a.im - a.re * b.im) / (b.re*b.re + b.im*b.im);
+        re = real;
+        im = imag;
 
-        im = (im * b.re - re * b.im) / b.len();
-        re = temp/b.len();
         return this;
     }
 
@@ -110,5 +109,12 @@ public class Complex {
     */
     public double lengthSQ() {
         return re * re + im * im;
+    }
+
+    public double getReal() {
+        return re;
+    }
+    public double getImg() {
+        return im;
     }
 }
